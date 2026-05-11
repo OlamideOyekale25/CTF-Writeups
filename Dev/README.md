@@ -1,8 +1,6 @@
 # TCM Dev Box — CTF Writeup
 
 **Platform:** TCM Security  
-**Difficulty:** Beginner–Intermediate  
-**Author:** [Olamideoyek](https://medium.com/@olamideoyek/rooting-the-tcm-dev-box-walkthrough-34a91943b8f9)  
 **Full Walkthrough (with screenshots):** [Read on Medium](https://medium.com/@olamideoyek/rooting-the-tcm-dev-box-walkthrough-34a91943b8f9)
 
 ---
