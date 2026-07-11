@@ -1,7 +1,6 @@
 # Academy Box — CTF Writeup
 
-**Platform:** TCM Security  
-**Author:** [Olamideoyek](https://medium.com/@olamideoyek)  
+**Platform:** TCM Security   
 **Full Walkthrough (with screenshots):** [Read on Medium](https://medium.com/@olamideoyek/academy-box-ctf-walkthrough-b535a08e3f0b)
 
 ---
