@@ -1,8 +1,6 @@
 # TCM Blue — CTF Writeup (EternalBlue / MS17-010)
 
 **Platform:** TCM Security  
-**Difficulty:** Beginner  
-**Author:** [Olamideoyek](https://medium.com/@olamideoyek)  
 **Full Walkthrough:** [Read on Medium](https://medium.com/@olamideoyek/tcm-blue-walkthrough-131f154256b9)
 
 ---
