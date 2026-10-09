@@ -255,6 +255,28 @@ cat /root/flag.txt
 
 ---
 
+## Remediation / Defensive Notes
+
+| Finding | Remediation |
+|---|---|
+| Anonymous FTP login enabled, exposing `note.txt` | Disable anonymous FTP access; audit FTP configs for publicly readable content |
+| Credentials stored as MD5 hashes | Use a modern adaptive hashing algorithm (bcrypt, Argon2); never MD5/SHA1 for password storage |
+| Unrestricted profile-photo upload (accepted `.php`) | Enforce server-side file type validation (whitelist, content-type checks); strip executable extensions; disable script execution in upload directories |
+| Plaintext password in a PHP config file | Store secrets in environment variables or a secrets manager; restrict config file permissions |
+| Writable root-owned cron job (`backup.sh`) | Set strict root-only write permissions on scripts run by privileged cron jobs; audit cron directories regularly |
+
+## MITRE ATT&CK Mapping
+
+| Phase | Technique | ID |
+|---|---|---|
+| Credential Access | Brute Force: Password Cracking | T1110.002 |
+| Initial Access | Exploit Public-Facing Application | T1190 |
+| Execution | Command and Scripting Interpreter: Unix Shell | T1059.004 |
+| Credential Access | Unsecured Credentials: Credentials In Files | T1552.001 |
+| Privilege Escalation | Scheduled Task/Job: Cron | T1053.003 |
+
+---
+
 ## Key Takeaways
 
 - **Anonymous FTP** should always be tested — sensitive files like credential notes are a common finding.
