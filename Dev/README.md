@@ -174,6 +174,28 @@ This spawned a root shell by abusing `zip`'s `-TT` flag to execute an arbitrary 
 
 ---
 
+## Remediation / Defensive Notes
+
+| Finding | Remediation |
+|---|---|
+| Plaintext credentials in `config.yml` | Store secrets via environment variables or a secrets manager; restrict file permissions; exclude config files from version control |
+| BoltWire v6.0.3 Local File Inclusion | Patch/upgrade BoltWire to a fixed version; validate and sanitize all file path parameters server-side |
+| NFS share (`/srv/nfs`) exported to broad private subnets | Restrict NFS exports to specific trusted hosts; apply `root_squash` and least-privilege export permissions |
+| SSH private key stored in a weakly password-protected ZIP | Avoid storing private keys in password-protected archives on shared storage; enforce strong, unique passphrases |
+| Sudo NOPASSWD entry for `zip` | Remove unnecessary sudo grants on GTFOBins-listed utilities; apply least privilege in sudoers |
+
+## MITRE ATT&CK Mapping
+
+| Phase | Technique | ID |
+|---|---|---|
+| Credential Access | Unsecured Credentials: Credentials In Files | T1552.001 |
+| Initial Access | Exploit Public-Facing Application | T1190 |
+| Discovery | Network Share Discovery | T1135 |
+| Credential Access | Unsecured Credentials: Private Keys | T1552.004 |
+| Privilege Escalation | Abuse Elevation Control Mechanism: Sudo and Sudo Caching | T1548.003 |
+
+---
+
 ## Key Takeaways
 
 - Credential files exposed via misconfigured web directories are a common and high-impact finding.
