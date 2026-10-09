@@ -190,6 +190,26 @@ cat /etc/shadow
 
 ---
 
+## Remediation / Defensive Notes
+
+| Finding | Remediation |
+|---|---|
+| Internal email address exposed in page source | Remove developer comments/metadata before deployment; review source for sensitive leaks as part of release checklist |
+| Publicly accessible `phpinfo()` page | Remove or restrict `phpinfo()` output in production environments |
+| Navigate CMS v2.8 known authenticated RCE | Patch/upgrade CMS to a non-vulnerable version; monitor vendor security advisories |
+| SUID bit set on `php7.3` interpreter | Remove unnecessary SUID bits from language interpreters; audit via `find / -perm -4000` regularly |
+
+## MITRE ATT&CK Mapping
+
+| Phase | Technique | ID |
+|---|---|---|
+| Reconnaissance | Search Victim-Owned Websites | T1594 |
+| Initial Access | Exploit Public-Facing Application | T1190 |
+| Execution | Command and Scripting Interpreter | T1059 |
+| Privilege Escalation | Abuse Elevation Control Mechanism (SUID/SGID) | T1548.001 |
+
+---
+
 ## Key Takeaways
 
 - **Page source review** is a simple but often overlooked step that can leak critical information like emails and domain hints.
