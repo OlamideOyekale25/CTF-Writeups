@@ -121,7 +121,24 @@ Because `find` executes with elevated (SUID) privileges, the spawned shell inher
 | `find` (SUID abuse) | Privilege escalation to root |
 
 ---
+## Remediation / Defensive Notes
 
+| Finding | Remediation |
+|---|---|
+| Drupal 7 vulnerable to Drupalgeddon2 (CVE-2018-7600) | Patch to a fixed Drupal version immediately upon CVE disclosure; subscribe to Drupal security advisories |
+| Unauthenticated RCE reachable from the internet-facing CMS | Place CMS admin surfaces behind a WAF or VPN; restrict direct exposure of the application layer |
+| `find` binary had SUID bit set | Remove unnecessary SUID bits from utility binaries; audit `find / -perm -4000` regularly as part of hardening baselines |
+| No apparent file integrity monitoring | Deploy auditd or a file integrity monitoring tool to flag SUID changes and unexpected `/tmp` execution |
+
+## MITRE ATT&CK Mapping
+
+| Phase | Technique | ID |
+|---|---|---|
+| Initial Access | Exploit Public-Facing Application | T1190 |
+| Execution | Command and Scripting Interpreter | T1059 |
+| Privilege Escalation | Exploitation for Privilege Escalation | T1068 |
+| Privilege Escalation | Abuse Elevation Control Mechanism (SUID/SGID) | T1548.001 |
+---
 ## Key Takeaways
 
 - **Drupalgeddon2 (CVE-2018-7600)** remains one of the most reliable unauthenticated RCE exploits for Drupal 7/8 — a great reminder to keep CMS platforms patched and updated.
