@@ -166,6 +166,25 @@ With a listener running (Netcat or Meterpreter) before restarting the service, t
 
 ---
 
+## Remediation / Defensive Notes
+
+| Finding | Remediation |
+|---|---|
+| Jenkins exposed with weak credentials (`jenkins:jenkins`) | Enforce strong password policy and MFA for Jenkins; eliminate default/weak credential pairs; rate-limit or lock out repeated login attempts |
+| Script Console accessible to any authenticated user | Restrict Script Console access to trusted admins via RBAC (Role Strategy plugin); disable it entirely if not operationally required |
+| Unquoted service path (`WiseBootAssistant`) | Quote all service binary paths containing spaces; audit services regularly (`wmic service get name,pathname` or PowerShell equivalent) |
+| Writable directories earlier in an unquoted path than the intended binary | Restrict write permissions on `Program Files` subdirectories to administrators only |
+
+## MITRE ATT&CK Mapping
+
+| Phase | Technique | ID |
+|---|---|---|
+| Credential Access | Brute Force: Password Guessing | T1110.001 |
+| Initial Access | Valid Accounts | T1078 |
+| Execution | Command and Scripting Interpreter | T1059 |
+| Privilege Escalation | Hijack Execution Flow: Path Interception by Unquoted Path | T1574.009 |
+
+---
 ## Key Takeaways
 
 - **Exposed Jenkins instances** with default or weak credentials remain a common and high-impact finding — the Script Console provides direct RCE once authenticated.
