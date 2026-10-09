@@ -127,6 +127,24 @@ This confirmed successful interaction with — and exploitation of — the vulne
 
 ---
 
+## Remediation / Defensive Notes
+
+| Finding | Remediation |
+|---|---|
+| SMBv1 vulnerable to MS17-010 (EternalBlue) | Apply the MS17-010 patch immediately; disable SMBv1 entirely where not required |
+| SMB (port 445) reachable without restriction | Restrict SMB to only necessary internal hosts via firewall rules; segment legacy systems from the wider network |
+| End-of-support Windows 7 host in use | Decommission or isolate unsupported OS versions; apply compensating controls (network isolation, enhanced monitoring) if replacement isn't immediate |
+
+## MITRE ATT&CK Mapping
+
+| Phase | Technique | ID |
+|---|---|---|
+| Initial Access | Exploitation of Remote Services | T1210 |
+| Execution | Command and Scripting Interpreter | T1059 |
+| Impact | Endpoint Denial of Service (observed BSOD) | T1499 |
+
+---
+
 ## Key Takeaways
 
 - **EternalBlue (MS17-010)** remains one of the most well-known SMB vulnerabilities, notably used in the WannaCry and NotPetya outbreaks — it grants SYSTEM access directly with no need for further privilege escalation.
