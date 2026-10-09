@@ -276,6 +276,27 @@ cat root.txt
 
 ---
 
+## Remediation / Defensive Notes
+
+| Finding | Remediation |
+|---|---|
+| `robots.txt` disclosed a sensitive URL pattern (`mod_userdir`) | Don't rely on `robots.txt` for access control; restrict or disable `mod_userdir` for sensitive paths |
+| SSH private key exposed via a hidden, web-accessible dotfile | Never store private keys inside web-served directories; restrict dotfile/directory listing access at the web server level |
+| Weak/crackable SSH key passphrase | Enforce passphrase complexity policies for private keys; prefer hardware-backed keys (YubiKey/FIDO2) over passphrase-only protection |
+| Writable Python stdlib module (`webbrowser.py`) imported by a sudo-permitted script | Lock down write permissions on interpreter library paths; avoid granting sudo on scripts that import from writable or non-system paths |
+| Sudo NOPASSWD entry for `pip` | Never grant sudo on package managers or interpreters (GTFOBins-listed); restrict sudoers entries to specific, argument-pinned commands |
+
+## MITRE ATT&CK Mapping
+
+| Phase | Technique | ID |
+|---|---|---|
+| Credential Access | Unsecured Credentials: Private Keys | T1552.004 |
+| Credential Access | Brute Force: Password Cracking | T1110.002 |
+| Privilege Escalation | Hijack Execution Flow | T1574 |
+| Privilege Escalation | Abuse Elevation Control Mechanism: Sudo and Sudo Caching | T1548.003 |
+
+---
+
 ## Key Takeaways
 
 - **`robots.txt`** disallow entries can leak URL *patterns* even when the literal path is a decoy — always test the pattern, not just the exact string.
